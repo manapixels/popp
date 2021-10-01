@@ -1,12 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './index.scss';
+import './css/bootstrap-grid.min.css'
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import Home from './scenes/Home';
+import Explore from './scenes/Explore';
+import Pay from './scenes/Pay';
+import Stamps from './scenes/Stamps';
+import Rewards from './scenes/Rewards';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/explore">
+          <Explore />
+        </Route>
+        <Route path="/pay">
+          <Pay />
+        </Route>
+        <Route path="/stamps">
+          <Stamps />
+        </Route>
+        <Route path="/rewards">
+          <Rewards />
+        </Route>
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

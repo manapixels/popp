@@ -1,0 +1,55 @@
+:root {
+    --primary-light: #ddf5ff;
+    --primary-light-2: #d0f1ff;
+    --secondary-light: #FCEEF3;
+
+    --white: #ffffff;
+    --gray-98: #f3f3f3;
+    --gray-95: #EDEDED;
+    --gray-90: #E3E3E3;
+    --gray-85: #D9D9D9;
+    --gray-80: #CCCCCC;
+    --gray-75: #C0C0C0;
+    --gray-70: #B0B0B0;
+    --gray-60: #999999;
+    --gray-50: #808080;
+    --gray-45: #727272;
+    --gray-40: #696969;
+    --gray-30: #4D4D4D;
+    --gray-20: #363636;
+    --gray-15: #222222;
+    --gray-10: #171717;
+    --black: #000000;
+    --border-radius-default: 1rem;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+button {
+    cursor: pointer;
+}
+
+.page-header {
+    padding: 2rem 2rem 1rem;
+    font-size: 200%;
+    font-weight: bold;
+    background: var(--secondary-light);
+}
+.page-body {
+    padding: 2rem 0;
+}

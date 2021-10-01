@@ -1,0 +1,33 @@
+.home-page {
+    .your-top-brands {
+        .brand-item {
+            display: inline-block;
+            margin-right: 1rem;
+            background: var(--primary-light);
+            border-radius: var(--border-radius-default);
+            padding: 1rem;
+            border: none;
+
+            &:hover {
+                background: var(--primary-light-2);
+            }
+
+            .logo {
+                width: 5.5rem;
+                border-radius: 50%;
+
+                img {
+                    max-width: 100%;
+                    border-radius: 50%;
+                }
+            }
+            .name {
+                font-size: 90%;
+                text-align: center;
+                font-weight: bold;
+                color: var(--gray-50);
+                margin-top: .3rem;
+            }
+        }
+    }
+}
