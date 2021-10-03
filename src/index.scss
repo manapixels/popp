@@ -1,7 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+
 :root {
-    --primary-light: #ddf5ff;
-    --primary-light-2: #d0f1ff;
-    --secondary-light: #FCEEF3;
+    --primary: #E6227B;
+    --primary-light: #FCEEF3;
+    --primary-light-hover: #fce3eb;
+    --secondary-light: #ddf5ff;
+    --secondary-light-2: #d0f1ff;
+
+    --tertiary: #FFD700;
+    --success: #28a745;
+    --warning: #ffc107;
+    --danger: #dc3545;
 
     --white: #ffffff;
     --gray-98: #f3f3f3;
@@ -20,20 +29,38 @@
     --gray-15: #222222;
     --gray-10: #171717;
     --black: #000000;
+
     --border-radius-default: 1rem;
+    --border-radius-small: .5rem;
+
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
     --breakpoint-md: 768px;
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
+
+    --zindex-dropdown: 1000;
+    --zindex-sticky: 1020;
+    --zindex-fixed: 1030;
+    --zindex-modal-backdrop: 1040;
+    --zindex-modal: 1050;
+    --zindex-popover: 1060;
+    --zindex-tooltip: 1070;
+
+    --cubic-bezier-easeInOutCubic: cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    font-family: -apple-system, BlinkMacSystemFont, "Source Sans Pro", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
         "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    user-select: none; /* supported by Chrome and Opera */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 code {
@@ -45,11 +72,61 @@ button {
 }
 
 .page-header {
-    padding: 2rem 2rem 1rem;
-    font-size: 200%;
-    font-weight: bold;
-    background: var(--secondary-light);
+    padding: 2.5rem 0 1.5rem;
+    background: var(--primary-light);
+
+    .title {
+        font-size: 200%;
+        font-weight: bold;
+    }
 }
 .page-body {
-    padding: 2rem 0;
+    padding: 1rem 0;
+
+    section {
+        margin-bottom: 1.5rem;
+
+        .section-title-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .section-title {
+            font-weight: 600;
+            color: var(--gray-15);
+            margin-top: .5rem;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--border-radius-small);
+    background: var(--white);
+    padding: .4rem .8rem;
+    border: 1px solid transparent;
+
+    .icon {
+        margin-right: .2rem;
+    }
+}
+.btn-circle {
+    border-radius: 50%;
+}
+.btn-primary {
+    background: var(--primary);
+    color: var(--white);
+}
+.btn-primary-outline {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.btn-success {
+    background: var(--success);
+    color: var(--white);
+}
+.body-wrapper {
+    padding-bottom: 5rem;
 }

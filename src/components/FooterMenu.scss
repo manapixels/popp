@@ -1,0 +1,41 @@
+.footer-menu {
+    display: flex;
+    align-self: flex-end;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: .5rem;
+    border-top: 1px solid var(--gray-90);
+    background: var(--white);
+    z-index: var(--zindex-fixed);
+
+    a {
+        flex: 1 1 25%;
+        width: 25%;
+        text-align: center;
+        text-decoration: none;
+
+        .name {
+            font-size: 90%;
+            color: var(--gray-10);
+        }
+
+        .icon svg path.inner {
+            stroke-width: .1rem;
+            stroke: var(--black);
+        }
+
+        &:hover {
+            .icon svg path.inner {
+                stroke: var(--primary);
+            }
+        }
+
+        &.active {
+            .icon svg path.inner {
+                fill: var(--primary);
+                stroke: var(--primary);
+            }
+        }
+    }
+}
