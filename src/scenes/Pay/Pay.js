@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Web3 from 'web3'
 import logoMcdonalds from '../../images/logo-mcdonalds.svg'
 import bigMacMeal from '../../images/product-big-mac-meal.png'
@@ -33,24 +33,24 @@ const Pay = () => {
             })
     }, [])
 
-    useEffect(() => {
-        if (currProductList && currProductList.length > 0) {
-            setSelectedProducts([...Array(currProductList.length)].map(() => 0))
-            calculateTotal()
-        }
-    }, [currProductList])
-
-    useEffect(() => {
-        calculateTotal()
-    }, [selectedProducts])
-
-    const calculateTotal = () => {
+    const calculateTotal = useCallback(() => {
         let _total = 0
         for (let i = 0; i < selectedProducts.length; i++) {
             _total += selectedProducts[i] * currProductList[i].priceInUsd
         }
         setTotal(_total)
-    }
+    }, [currProductList, selectedProducts])
+
+    useEffect(() => {
+        if (currProductList && currProductList.length > 0) {
+            setSelectedProducts([...Array(currProductList.length)].map(() => 0))
+            calculateTotal()
+        }
+    }, [currProductList, calculateTotal])
+
+    useEffect(() => {
+        calculateTotal()
+    }, [selectedProducts, calculateTotal])
 
     const addCount = (productIndex) => {
         let _selectedProducts = selectedProducts.slice(0)

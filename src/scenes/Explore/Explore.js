@@ -1,8 +1,8 @@
 import React from 'react'
 import Map from './components/Map'
 import logoMcdonalds from '../../images/logo-mcdonalds.svg'
-import logoStarbucks from '../../images/logo-starbucks.svg'
-import logoLego from '../../images/logo-lego.svg'
+// import logoStarbucks from '../../images/logo-starbucks.svg'
+// import logoLego from '../../images/logo-lego.svg'
 import './Explore.scss'
 
 const Explore = () => {
