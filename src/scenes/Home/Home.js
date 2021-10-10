@@ -103,7 +103,7 @@ const Home = () => {
                                 </div>
                                 <div className="favourite">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="27.61" height="24.844" viewBox="0 0 27.61 24.844">
-                                        <path id="Path_171" data-name="Path 171" d="M257.834,419.99l-10.349,10.25-10.349-10.25m0,0a6.9,6.9,0,1,1,10.349-9.061A6.9,6.9,0,1,1,257.834,420" transform="translate(-233.673 -406.771)" fill="#ff3c49" stroke="#ff3c49" strokeLinecap="round" strokeLinejoin="round" stroke-width="2.75"/>
+                                        <path id="Path_171" data-name="Path 171" d="M257.834,419.99l-10.349,10.25-10.349-10.25m0,0a6.9,6.9,0,1,1,10.349-9.061A6.9,6.9,0,1,1,257.834,420" transform="translate(-233.673 -406.771)" fill="#ff3c49" stroke="#ff3c49" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.75"/>
                                     </svg>
                                 </div>
                             </div>

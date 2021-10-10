@@ -1,5 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Web3 from 'web3'
+import { ethers } from 'ethers'
+import { ContractRegistry, ChainContract, APIClient } from '@umb-network/toolbox'
+
 import logoMcdonalds from '../../images/logo-mcdonalds.svg'
 import bigMacMeal from '../../images/product-big-mac-meal.png'
 import mcSpicyMeal from '../../images/product-mcspicy-meal.png'
@@ -10,16 +13,26 @@ import aggregatorV3InterfaceABI from '../../abi/aggregatorV3InterfaceABI.json'
 
 import './Pay.scss'
 
-const web3 = new Web3("https://mainnet.infura.io/v3/4ae228220ba840e78a30229015b868f0");
+const { 
+    REACT_APP_UMBRELLA_API_URL: UMBRELLA_API_URL, 
+    REACT_APP_UMBRELLA_API_KEY: UMBRELLA_API_KEY,
+    REACT_APP_UMBRELLA_REGISTRY_CONTRACT_ADDRESS: UMBRELLA_REGISTRY_CONTRACT_ADDRESS,
+    REACT_APP_BLOCKCHAIN_PROVIDER_URL: BLOCKCHAIN_PROVIDER_URL,
+} = process.env
+
+const web3 = new Web3(BLOCKCHAIN_PROVIDER_URL);
 const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419");
 
 
 const Pay = () => {
 
     const [currETHPrice, setCurrETHPrice] = useState()
+    const [currETHPriceUmbrella, setCurrETHPriceUmbrella] = useState()
     const [currProductList, setCurrProductList] = useState([])
     const [selectedProducts, setSelectedProducts] = useState({})
     const [total, setTotal] = useState(0)
+
+    let apiClient = undefined
 
     useEffect(() => {
         setCurrProductList(exampleProductList)
@@ -27,11 +40,40 @@ const Pay = () => {
             .then((roundData) => {
                 // Do something with roundData
                 if (roundData && roundData.answer) {
-                    console.log("ETH/USD", roundData.answer / Math.pow(10, 8))
+                    console.log("Chainlink ETH/USD", roundData.answer / Math.pow(10, 8))
                     setCurrETHPrice(roundData.answer / Math.pow(10, 8))
                 }
             })
+        getUmbrellaPriceData()
+        setInterval(getUmbrellaPriceData, 30000) // Get new data every 30 secs
     }, [])
+
+    async function setApiClient() {
+
+        const provider = new ethers.providers.JsonRpcProvider(BLOCKCHAIN_PROVIDER_URL)
+        const chainContractAddress = new ContractRegistry(provider, UMBRELLA_REGISTRY_CONTRACT_ADDRESS).getAddress('Chain')
+        const chainContract = new ChainContract(provider, chainContractAddress)
+        apiClient = new APIClient({
+            baseURL: UMBRELLA_API_URL,
+            chainContract,
+            apiKey: UMBRELLA_API_KEY,
+        })
+    }
+
+    async function getUmbrellaPriceData() {
+        if (apiClient === undefined) {
+            await setApiClient()
+        }
+        if (apiClient && BLOCKCHAIN_PROVIDER_URL && UMBRELLA_REGISTRY_CONTRACT_ADDRESS && UMBRELLA_API_KEY) {
+            
+            const proof = await apiClient.verifyProofForNewestBlock('ETH-USD')
+            if (proof.value) {
+                console.log("Umbrella ETH/USD", proof.value)
+                setCurrETHPriceUmbrella(proof.value)
+            }
+        }
+    
+    }
 
     useEffect(() => {
         if (currProductList && currProductList.length > 0) {
@@ -86,7 +128,7 @@ const Pay = () => {
                     <div className="store">
                         <div className="store-navigation">
                             <button className="btn btn-outline-gray" style={{ padding: 0 }}>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-left" width="30" height="30" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#000000" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                     <line x1="5" y1="12" x2="19" y2="12" />
                                     <line x1="5" y1="12" x2="11" y2="18" />
@@ -103,7 +145,7 @@ const Pay = () => {
                                 <img src={logoMcdonalds} className="store-logo" alt="McDonald's" />
                                 <span className="store-name">McDonald's</span>
                             </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="var(--gray-70)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-heart" width="30" height="30" viewBox="0 0 24 24" strokeWidth="1.5" stroke="var(--gray-70)" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
                             </svg>
@@ -125,7 +167,7 @@ const Pay = () => {
 
                                     <div className="amount">
                                         <button className="minus" onClick={() => removeCount(i)}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1" stroke="#000000" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-minus" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1" stroke="#000000" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                 <line x1="5" y1="12" x2="19" y2="12" />
                                             </svg>
@@ -138,7 +180,7 @@ const Pay = () => {
                                             value={selectedProducts[i]}
                                             onChange={(e) => changeCount(e.target.value, i)} /> */}
                                         <button className="plus" onClick={() => addCount(i)}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1" stroke="#000000" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-plus" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1" stroke="#000000" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                 <line x1="12" y1="5" x2="12" y2="19" />
                                                 <line x1="5" y1="12" x2="19" y2="12" />
@@ -159,7 +201,7 @@ const Pay = () => {
                         <span className="priceInUsd">${total}</span>
                     </div>
                     <button className={`btn btn-primary ${total === 0 && 'disabled'}`}>Pay {total !== 0 && (
-                            <span className="priceInEth">{(total / currETHPrice).toFixed(4)} ETH</span>
+                            <span className="priceInEth">{(total / (currETHPrice + currETHPriceUmbrella) / 2).toFixed(4)} ETH</span>
                         )}</button>
                 </div>
             </div>
