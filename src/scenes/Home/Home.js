@@ -5,7 +5,7 @@ import logoMcdonalds from '../../images/logo-mcdonalds.svg'
 import logoStarbucks from '../../images/logo-starbucks.svg'
 import logoLego from '../../images/logo-lego.svg'
 import logoIkea from '../../images/logo-ikea.svg'
-import productBigMac from '../../images/product-bigmac.png'
+import productBigMac from '../../images/product-big-mac.png'
 import './Home.scss'
 
 const Home = () => {
@@ -103,21 +103,21 @@ const Home = () => {
                                 </div>
                                 <div className="favourite">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="27.61" height="24.844" viewBox="0 0 27.61 24.844">
-                                        <path id="Path_171" data-name="Path 171" d="M257.834,419.99l-10.349,10.25-10.349-10.25m0,0a6.9,6.9,0,1,1,10.349-9.061A6.9,6.9,0,1,1,257.834,420" transform="translate(-233.673 -406.771)" fill="#ff3c49" stroke="#ff3c49" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.75"/>
+                                        <path id="Path_171" data-name="Path 171" d="M257.834,419.99l-10.349,10.25-10.349-10.25m0,0a6.9,6.9,0,1,1,10.349-9.061A6.9,6.9,0,1,1,257.834,420" transform="translate(-233.673 -406.771)" fill="#ff3c49" stroke="#ff3c49" strokeLinecap="round" strokeLinejoin="round" stroke-width="2.75"/>
                                     </svg>
                                 </div>
                             </div>
                             <div className="progress">
                                 {[...Array(3)].map((i) => (
-                                    <div className="stamp-container">
-                                        <div className="stamp active" key={i}>
+                                    <div className="stamp-container" key={i}>
+                                        <div className="stamp active">
                                             <img src={productBigMac} alt="Big Mac" />
                                             <div className="symbol">BMB</div>
                                         </div>
                                     </div>
                                 ))}
                                 {[...Array(5)].map((i) => (
-                                    <div className="stamp-container">
+                                    <div className="stamp-container" key={i}>
                                         <div className="stamp">
                                             <img src={productBigMac} alt="Big Mac" />
                                         </div>

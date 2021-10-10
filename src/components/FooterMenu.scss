@@ -8,6 +8,7 @@
     border-top: 1px solid var(--gray-90);
     background: var(--white);
     z-index: var(--zindex-fixed);
+    height: 5.2rem;
 
     a {
         flex: 1 1 25%;
@@ -20,21 +21,25 @@
             color: var(--gray-10);
         }
 
-        .icon svg path.inner {
-            stroke-width: .1rem;
+        .icon svg .line {
+            // stroke-width: .1rem;
             stroke: var(--black);
         }
 
         &:hover {
-            .icon svg path.inner {
+            .icon svg .line {
                 stroke: var(--primary);
+                fill: var(--primary);
             }
         }
 
         &.active {
-            .icon svg path.inner {
-                fill: var(--primary);
+            .icon svg .line {
                 stroke: var(--primary);
+                fill: none;
+            }
+            .name {
+                color: var(--primary);
             }
         }
     }

@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import './css/bootstrap-grid.min.css'
+// import './css/bootstrap-grid.min.css'
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import FooterMenu from './components/FooterMenu';
 import Home from './scenes/Home';
 import Explore from './scenes/Explore';
-import Order from './scenes/Order';
+import Pay from './scenes/Pay';
 import Stamps from './scenes/Stamps';
-import Rewards from './scenes/Rewards';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,14 +22,11 @@ ReactDOM.render(
           <Route path="/explore">
             <Explore />
           </Route>
-          <Route path="/order">
-            <Order />
+          <Route path="/pay">
+            <Pay />
           </Route>
           <Route path="/stamps">
             <Stamps />
-          </Route>
-          <Route path="/rewards">
-            <Rewards />
           </Route>
         </Switch>
       </div>

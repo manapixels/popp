@@ -1,0 +1,73 @@
+.stamps-page {
+    .show-claimable-only-container {
+        padding: .4rem .8rem;
+        border: 1px solid var(--gray-80);
+        border-radius: var(--border-radius-default);
+        background: rgba(255,255,255,0.5);
+
+        #show-claimable-only:checked + label {
+            color: var(--primary);
+        }
+
+        &.checked {
+            border-color: var(--primary);
+        }
+    }
+    .accordion-item {
+        // border: none;
+
+        .accordion-button:not(.collapsed) {
+            // box-shadow: none;
+        }
+        .accordion-header {
+            position: sticky;
+            top: 0;
+        }
+        .accordion-body {
+            // // padding: 0;
+        }
+    }
+    .brand-item {
+
+        .accordion-button {
+            font-size: 1.3rem;
+
+            &:not(.collapsed) {
+                color: #000;
+                background-color: #FFF;
+            }
+        }
+        .logo {
+            margin-right: 0.7rem;
+
+            img {
+                width: 2rem;
+            }
+        }
+        .name {
+            margin-right: 0.7rem;
+        }
+    }
+    .campaign {
+        padding: 1rem;
+        border-radius: var(--border-radius-small);
+        border: 1px solid var(--gray-90);
+        margin-bottom: 1rem;
+
+        .product-image {
+            max-width: 30%;
+            margin-right: .8rem;
+
+            img {
+                width: 100%;
+                max-height: 4.5rem;
+            }
+        }
+        .name {
+            font-weight: 600;
+        }
+        .expiry-date {
+            color: var(--gray-60);
+        }
+    }
+}
