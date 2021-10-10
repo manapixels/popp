@@ -46,6 +46,7 @@ const Pay = () => {
             })
         getUmbrellaPriceData()
         setInterval(getUmbrellaPriceData, 30000) // Get new data every 30 secs
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     async function setApiClient() {
