@@ -33,24 +33,22 @@ const Pay = () => {
             })
     }, [])
 
-    const calculateTotal = useCallback(() => {
-        let _total = 0
-        for (let i = 0; i < selectedProducts.length; i++) {
-            _total += selectedProducts[i] * currProductList[i].priceInUsd
-        }
-        setTotal(_total)
-    }, [currProductList, selectedProducts])
-
     useEffect(() => {
         if (currProductList && currProductList.length > 0) {
             setSelectedProducts([...Array(currProductList.length)].map(() => 0))
-            calculateTotal()
         }
-    }, [currProductList, calculateTotal])
+    }, [currProductList])
 
     useEffect(() => {
+        const calculateTotal = () => {
+            let _total = 0
+            for (let i = 0; i < selectedProducts.length; i++) {
+                _total += selectedProducts[i] * currProductList[i].priceInUsd
+            }
+            setTotal(_total)
+        }
         calculateTotal()
-    }, [selectedProducts, calculateTotal])
+    }, [selectedProducts, currProductList])
 
     const addCount = (productIndex) => {
         let _selectedProducts = selectedProducts.slice(0)
